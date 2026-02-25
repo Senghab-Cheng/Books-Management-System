@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Library Management System</h1>
+  </header>
+
+  <main class="layout">
+    <section class="card">
+      <h2>Add Book</h2>
+      <form class="form-grid" action="/ui/books" method="post">
+        <label>Title<input name="title" required></label>
+        <label>Author<input name="author" required></label>
+        <label>ISBN<input name="isbn" required></label>
+        <button type="submit">Create Book</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Add Member</h2>
+      <form class="form-grid" action="/ui/members" method="post">
+        <label>Name<input name="name" required></label>
+        <label>Email<input type="email" name="email" required></label>
+        <button type="submit">Create Member</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Borrow Book</h2>
+      <form class="form-grid" action="/ui/borrow" method="post">
+        <label>Book ID<input type="number" name="bookId" min="1" required></label>
+        <label>Member ID<input type="number" name="memberId" min="1" required></label>
+        <button type="submit">Borrow</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Return Book</h2>
+      <form id="returnForm" class="form-grid" action="/ui/return" method="post">
+        <label>Borrow ID<input type="number" name="borrowId" min="1" required></label>
+        <button type="submit">Return</button>
+      </form>
+    </section>
+
+    <section class="card wide" th:if="${message}">
+      <h2>Latest Action Result</h2>
+      <pre class="result success" th:text="${message}"></pre>
+    </section>
+
+    <section class="card wide" th:if="${error}">
+      <h2>Latest Action Result</h2>
+      <pre class="result error" th:text="${error}"></pre>
+    </section>
+
+    <section class="card wide">
+      <h2>Books</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>ISBN</th>
+              <th>Available</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:if="${#lists.isEmpty(books)}">
+              <td colspan="5">No books found.</td>
+            </tr>
+            <tr th:each="book : ${books}">
+              <td th:text="${book.id}"></td>
+              <td th:text="${book.title}"></td>
+              <td th:text="${book.author}"></td>
+              <td th:text="${book.isbn}"></td>
+              <td th:text="${book.available ? 'Yes' : 'No'}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card wide">
+      <h2>Members</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:if="${#lists.isEmpty(members)}">
+              <td colspan="3">No members found.</td>
+            </tr>
+            <tr th:each="member : ${members}">
+              <td th:text="${member.id}"></td>
+              <td th:text="${member.name}"></td>
+              <td th:text="${member.email}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
