@@ -40,3 +40,16 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.register('prepareRailpackLayout', Copy) {
+    dependsOn tasks.named('bootJar')
+    from(layout.buildDirectory.dir('libs')) {
+        include '*.jar'
+        exclude '*plain*'
+    }
+    into(layout.projectDirectory.dir('railpack/build/libs'))
+}
+
+tasks.named('build') {
+    finalizedBy(tasks.named('prepareRailpackLayout'))
+}
