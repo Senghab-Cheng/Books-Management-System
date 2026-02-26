@@ -1,0 +1,5 @@
+[phases.build]
+cmds = ["cd demo && ./gradlew clean bootJar -x check -x test"]
+
+[start]
+cmd = "cd demo && java $JAVA_OPTS -Dserver.port=$PORT -jar $(ls -1 build/libs/*.jar | grep -v plain | head -n 1)"
