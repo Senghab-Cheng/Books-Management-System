@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Signup</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="auth-shell">
+  <section class="auth-panel">
+    <h1>Create User Account</h1>
+    <p class="muted">Register a user account saved in your PostgreSQL database.</p>
+
+    <p class="alert error" th:if="${error}" th:text="${error}"></p>
+
+    <form class="form-grid" action="/signup/user" method="post">
+      <label>Username<input type="text" name="username" placeholder="Choose a username" required></label>
+      <label>Password<input type="password" name="password" placeholder="Choose a password" required></label>
+      <button type="submit">Create Account</button>
+    </form>
+
+    <div class="action-grid">
+      <a class="button-link ghost" href="/login/user">Back to User Login</a>
+      <a class="button-link ghost" href="/">Back to Role Selection</a>
+    </div>
+  </section>
+</main>
+</body>
+</html>

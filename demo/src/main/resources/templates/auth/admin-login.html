@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="auth-shell">
+  <section class="auth-panel">
+    <h1>Admin Portal</h1>
+    <p class="muted">Sign in with your administrator credentials.</p>
+
+    <p class="alert error" th:if="${param.error}">Invalid admin credentials.</p>
+
+    <form class="form-grid" action="/perform-login" method="post">
+      <input type="hidden" name="expectedRole" value="ADMIN">
+      <label>Username<input type="text" name="username" placeholder="Enter admin username" required></label>
+      <label>Password<input type="password" name="password" placeholder="Enter admin password" required></label>
+      <button type="submit">Sign In as Admin</button>
+    </form>
+
+    <div class="auth-links">
+      <a href="/login/user">Go to User Login</a>
+      <a href="/">Back to Role Selection</a>
+    </div>
+  </section>
+</main>
+</body>
+</html>
