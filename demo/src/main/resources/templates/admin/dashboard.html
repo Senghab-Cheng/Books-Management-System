@@ -8,7 +8,10 @@
 </head>
 <body>
   <header class="topbar">
-    <h1>Admin Dashboard</h1>
+    <div class="topbar-brand">
+      <img class="logo small" th:src="@{/images/bms logo.png}" src="/images/" alt="Library logo">
+      <h1>Admin Dashboard</h1>
+    </div>
     <form action="/logout" method="post">
       <button type="submit">Logout</button>
     </form>

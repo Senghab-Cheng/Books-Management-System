@@ -9,7 +9,10 @@
 <body>
 <main class="auth-shell">
   <section class="auth-panel">
-    <h1>User Portal</h1>
+    <div class="brand">
+      <img class="logo" th:src="@{/images/bms logo.png}" src="/images/logo.png" alt="Library logo">
+      <h1>User Portal</h1>
+    </div>
     <p class="muted">Sign in to borrow and return books.</p>
 
     <p class="alert success" th:if="${message}" th:text="${message}"></p>

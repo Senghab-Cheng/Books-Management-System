@@ -9,7 +9,10 @@
 <body>
 <main class="auth-shell">
   <section class="auth-panel">
-    <h1>Admin Portal</h1>
+    <div class="brand">
+      <img class="logo" th:src="@{/images/bms logo.png}" src="/images/logo.png" alt="Library logo">
+      <h1>Admin Portal</h1>
+    </div>
     <p class="muted">Sign in with your administrator credentials.</p>
 
     <p class="alert error" th:if="${param.error}">Invalid admin credentials.</p>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,10 @@
 <body>
 <main class="auth-shell">
   <section class="auth-panel">
-    <h1>Library Management System</h1>
+    <div class="brand">
+      <img class="logo" th:src="@{/images/bms logo.png}" src="/images/logo.png" alt="Library logo">
+      <h1>Library Management System</h1>
+    </div>
     <p class="muted">Choose your access type to continue.</p>
 
     <div class="action-grid">
