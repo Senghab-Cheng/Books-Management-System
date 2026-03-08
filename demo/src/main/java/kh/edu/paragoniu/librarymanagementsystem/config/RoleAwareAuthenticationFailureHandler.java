@@ -1,0 +1,23 @@
+package kh.edu.paragoniu.librarymanagementsystem.config;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
+
+@Component
+public class RoleAwareAuthenticationFailureHandler implements AuthenticationFailureHandler {
+
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request,
+                                        HttpServletResponse response,
+                                        AuthenticationException exception) throws IOException, ServletException {
+        String expectedRole = request.getParameter("expectedRole");
+        boolean userLogin = "USER".equalsIgnoreCase(expectedRole);
+        String redirectPath = userLogin ? "/login/user?error=bad_credentials" : "/login/admin?error=bad_credentials";
+        response.sendRedirect(redirectPath);
+    }
+}
