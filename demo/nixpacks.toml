@@ -1,0 +1,5 @@
+[phases.build]
+cmds = ["./gradlew clean build -x check -x test -Pproduction --no-daemon -Dorg.gradle.java.home=$JAVA_HOME"]
+
+[start]
+cmd = "java $JAVA_OPTS -Dserver.port=$PORT -jar $(ls -1 build/libs/*.jar | grep -v plain | head -n 1)"

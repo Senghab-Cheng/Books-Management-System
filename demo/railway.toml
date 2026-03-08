@@ -1,0 +1,7 @@
+[build]
+buildCommand = "./gradlew clean build -x check -x test -Pproduction --no-daemon -Dorg.gradle.java.home=$JAVA_HOME"
+
+[deploy]
+startCommand = "java $JAVA_OPTS -Dserver.port=$PORT -jar $(ls -1 build/libs/*.jar | grep -v plain | head -n 1)"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
