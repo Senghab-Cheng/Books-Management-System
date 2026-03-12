@@ -35,5 +35,11 @@ public class Book {
     private String isbn;
 
     @Column(nullable = false)
+    private int quantity = 1;
+
+    @Column(nullable = false)
+    private int availableQuantity = 1;
+
+    @Column(nullable = false)
     private boolean available = true;
 }

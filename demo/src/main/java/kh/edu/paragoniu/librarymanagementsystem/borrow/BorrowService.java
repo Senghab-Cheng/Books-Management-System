@@ -33,11 +33,12 @@ public class BorrowService {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundException("Member not found: " + memberId));
 
-        if (!book.isAvailable()) {
-            throw new BusinessException("Book is not available");
+        if (book.getAvailableQuantity() <= 0) {
+            throw new BusinessException("No copies available");
         }
 
-        book.setAvailable(false);
+        book.setAvailableQuantity(book.getAvailableQuantity() - 1);
+        book.setAvailable(book.getAvailableQuantity() > 0);
 
         BorrowRecord borrowRecord = new BorrowRecord();
         borrowRecord.setBook(book);
@@ -57,7 +58,9 @@ public class BorrowService {
         }
 
         borrowRecord.setReturnDate(LocalDate.now());
-        borrowRecord.getBook().setAvailable(true);
+        Book book = borrowRecord.getBook();
+        book.setAvailableQuantity(book.getAvailableQuantity() + 1);
+        book.setAvailable(true);
 
         return BorrowResponse.from(borrowRecordRepository.save(borrowRecord));
     }
